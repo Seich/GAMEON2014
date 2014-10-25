@@ -5,10 +5,11 @@ import flixel.FlxG;
 import flixel.ui.FlxAnalog;
 import flixel.util.FlxColor;
 import flixel.util.FlxAngle;
+import flixel.util.FlxVelocity;
 
 class Player extends FlxSprite
 {
-	public var speed:Float = 200;
+	
 	private var vpad: FlxAnalog;
 
 	public function new(vpad: FlxAnalog, X:Float = 0, Y:Float = 0) {
@@ -20,6 +21,7 @@ class Player extends FlxSprite
 
 	override public function update() {
 		move();
+		super.update();
 	}
 
 	override public function destroy() {
@@ -27,15 +29,33 @@ class Player extends FlxSprite
 	}
 
 	function move() {
-		var angle = this.vpad.getAngle();
-		var status = this.vpad.status;
+		if(this.vpad.acceleration.x < 0){
+			this.velocity.x = -200;
+		}
+		else if (this.vpad.acceleration.x > 0){
+			this.velocity.x = 200;
+		}
 
+		if(this.vpad.acceleration.y < 0){
+			this.velocity.y = -200;
+		}
+		else if (this.vpad.acceleration.y > 0){
+			this.velocity.y = 200;
+		}
+		trace(this.vpad.acceleration.x);
+		trace(this.vpad.acceleration.y);
+		/*var angle = this.vpad.getAngle();
+		FlxVelocity.accelerateTowardsMouse(this,200,this.vpad.acceleration.x,this.vpad.acceleration.y);
+		var status = this.vpad.status;
+		this.acceleration.x = this.vpad.acceleration.x;
+		this.acceleration.y = this.vpad.acceleration.y;
 		if(status != 2) 
 		{
 			return;      
 		}
-
-		trace(angle);
+		trace(this.vpad.acceleration.x);
+		trace(this.vpad.acceleration.y);
+		trace(angle);*/
 	}
 
 }
