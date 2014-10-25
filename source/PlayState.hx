@@ -23,7 +23,7 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
-		vpad = new FlxAnalog(50, 50);
+		vpad = new FlxAnalog(50, FlxG.height - 50);
 		add(vpad);
 		add(new Player(vpad));
 		super.create();

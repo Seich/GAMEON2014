@@ -3,22 +3,23 @@ package;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.ui.FlxAnalog;
+import flixel.util.FlxColor;
+import flixel.util.FlxAngle;
 
 class Player extends FlxSprite
 {
+	public var speed:Float = 200;
 	private var vpad: FlxAnalog;
 
-	public function new(vpad: FlxAnalog) {
+	public function new(vpad: FlxAnalog, X:Float = 0, Y:Float = 0) {
+		super(X, Y);
 		this.vpad = vpad;
-		super();
+		super.makeGraphic(16,16, FlxColor.BLUE);
+		drag.x = drag.y = 1600;
 	}
 
 	override public function update() {
-		super.makeGraphic(16, 16);
-
 		move();
-
-		super.update();
 	}
 
 	override public function destroy() {
