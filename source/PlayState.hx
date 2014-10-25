@@ -25,7 +25,7 @@ class PlayState extends FlxState
 	{
 		vpad = new FlxAnalog(50, 50);
 		add(vpad);
-		add(new Player());
+		add(new Player(vpad));
 		super.create();
 	}
 	
