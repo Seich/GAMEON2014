@@ -3,23 +3,19 @@
 	[
 		{
 			"follow_symlinks": true,
-			"name": "GameOn2014",
-			"path": "/Users/seich/Documents/Projects/GameOn2014"
+			"path": "."
 		},
 		{
 			"follow_symlinks": true,
-			"name": "Flixel",
-			"path": "/usr/lib/haxe/lib/flixel/3,3,5/"
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\flixel"
 		},
 		{
 			"follow_symlinks": true,
-			"name": "Flixel Addons",
-			"path": "/usr/lib/haxe/lib/flixel-addons/1,1,0/"
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\flixel-addons"
 		},
 		{
 			"follow_symlinks": true,
-			"name": "Haxe",
-			"path": "/usr/lib/haxe/std"
+			"path": "C:\\HaxeToolkit\\haxe\\std"
 		}
 	]
 }
