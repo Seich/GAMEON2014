@@ -7,16 +7,25 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 
+import flixel.ui.FlxAnalog;
+
+import Player;
+
 /**
  * A FlxState which can be used for the actual gameplay.
  */
 class PlayState extends FlxState
 {
+	public static var vpad:FlxAnalog;
+
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
 	override public function create():Void
 	{
+		vpad = new FlxAnalog(50, 50);
+		add(vpad);
+		add(new Player());
 		super.create();
 	}
 	
