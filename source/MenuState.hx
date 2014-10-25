@@ -17,7 +17,14 @@ class MenuState extends FlxState
 	 */
 	override public function create():Void
 	{
+		var init_x = Math.floor(FlxG.width / 2 - 40);
+		add(new FlxButton(init_x, 80, "New Game", onClick));
 		super.create();
+	}
+
+	function onClick():Void 
+	{
+		FlxG.switchState(new PlayState());
 	}
 	
 	/**
