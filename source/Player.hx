@@ -16,6 +16,7 @@ class Player extends FlxSprite
 	private var movementPad: FlxAnalog;
 	private var level:Int;
 	private var minLevel:Int = 1;
+	private var attacking:Bool = false;
 	public function new(movementPad: FlxAnalog, X:Float = 0, Y:Float = 0) {
 		super(X, Y);
 		this.level = 1;
@@ -32,7 +33,9 @@ class Player extends FlxSprite
 
 	override public function draw()
 	{
-		if (velocity.x != 0 || velocity.y != 0)
+		if ((velocity.x != 0 || velocity.y != 0) && animation.get("attackLeft").finished 
+			&& animation.get("attackRight").finished && animation.get("attackUp").finished 
+			&& animation.get("attackDown").finished )
 		{
 			switch(facing)
 			{
@@ -51,6 +54,7 @@ class Player extends FlxSprite
 		super.draw();
 	}
 	public function attack(){
+		attacking = true;
 		switch(facing)
 			{
 				case FlxObject.LEFT:
@@ -64,6 +68,7 @@ class Player extends FlxSprite
 				case FlxObject.DOWN:
 					animation.play("attackDown");
 			}
+		attacking = false;
 	}
 
 	override public function destroy() {

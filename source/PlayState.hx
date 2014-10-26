@@ -55,15 +55,43 @@ class PlayState extends FlxState
 		FlxG.camera.bounds = new flixel.util.FlxRect(0, 0, 480, 480);
 
 		_grpEnemies = new FlxTypedGroup<Enemy>();
-		_grpEnemies.add(new Enemy(150, 250, 1, 100));
+		_grpEnemies.add(new Enemy(150, 250, 1));
+		_grpEnemies.add(new Enemy(150, 290, 1));
+		_grpEnemies.add(new Enemy(100, 265, 1));
 		add(_grpEnemies);
 		
 		buttons = new FlxVirtualPad(DPadMode.NONE, ActionMode.A);
+		buttons.alpha = 0.35;
 		add(buttons);
+
+		buttons.buttonA.onDown.callback = attack;
 
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 		add(movementPad);
 		super.create();
+	}
+
+	public function attack() {
+		player.attack();
+		_grpEnemies.forEachAlive(function(e: Enemy) {
+			if (player.facing == flixel.FlxObject.RIGHT) {
+				if (e.pixelsOverlapPoint(player.getMidpoint().add(player.width))) {
+					e.hurt(150);
+				}
+			} else if (player.facing == flixel.FlxObject.LEFT) {
+				if (e.pixelsOverlapPoint(player.getMidpoint().subtract(player.width))) {
+					e.hurt(150);
+				}
+			} else if (player.facing == flixel.FlxObject.DOWN) {
+				if (e.pixelsOverlapPoint(player.getMidpoint().add(0, player.height))) {
+					e.hurt(150);
+				}
+			} else if (player.facing == flixel.FlxObject.UP) {
+				if (e.pixelsOverlapPoint(player.getMidpoint().subtract(0, player.height))) {
+					e.hurt(150);
+				}
+			}
+		});
 	}
 	
 	/**
@@ -80,11 +108,6 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
-
-		if (buttons.buttonA.status == FlxButton.PRESSED) 
-		{
-			player.attack();
-		}
 
 		FlxG.collide(player, level);
 		_grpEnemies.forEachAlive(function (e:Enemy) {
@@ -107,7 +130,7 @@ class PlayState extends FlxState
 
 	private function checkEnemyVision(e:Enemy):Void
 	{
-		if (e.getMidpoint().distanceTo(player.getMidpoint()) <= 50)
+		if (e.getMidpoint().distanceTo(player.getMidpoint()) <= e.fovDistance)
 		{
 			e.seesPlayer = true;
 			e.playerPos.copyFrom(player.getMidpoint());

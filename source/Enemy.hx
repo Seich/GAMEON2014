@@ -3,6 +3,7 @@ package ;
 
 import flixel.FlxSprite;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.FlxAngle;
@@ -14,8 +15,9 @@ class Enemy extends FlxSprite
 
 	public var currentHealth(default, null):UInt;
 	public var maxHealth(default, null):UInt;
-	public var speed:Float = 100;
+	public var speed:Float = 80;
 	public var etype(default, null):Int;
+	public var fovDistance:Float = 160;
 
 	private var _brain:FSM;
 	private var _idleTmr:Float;
@@ -24,30 +26,45 @@ class Enemy extends FlxSprite
 	public var playerPos(default, null):FlxPoint;
 
 
-	public function new(x:Float=0, y:Float=0, EType:Int, health: UInt) 
+	public function new(x:Float=0, y:Float=0, EType:Int = 1) 
 	{
 		super(x, y);
 
 		etype = EType;
-		// loadGraphic("assets/images/enemy-" + Std.string(etype) + ".png", true, 32, 32);
-		// setFacingFlip(FlxObject.LEFT, false, false);
-		// setFacingFlip(FlxObject.RIGHT, true, false);
-		// animation.add("d", [0, 1, 0, 2], 6, false);
-		// animation.add("lr", [3, 4, 3, 5], 6, false);
-		// animation.add("u", [6, 7, 6, 8], 6, false);
+		loadGraphic("assets/images/enemy-1.png", true, 64, 64);
+		this.setGraphicSize(32,32);
+		this.updateHitbox();
+		animation.add("down", [0,1], 6, true);
+		animation.add("up",[0,1], 6, true);
+		animation.add("left",[0,1], 6, true);
+		animation.add("right",[0,1], 6, true);
 		drag.x = drag.y = 10;
-		// width = 8;
-		// height = 14;
-		// offset.x = 4;
-		// offset.y = 2;
-
-		maxHealth = health;
-		currentHealth = health;
+		
+		health = 100;
 		_brain = new FSM(idle);
 		_idleTmr = 0;
 		playerPos = FlxPoint.get();
+	}
 
-		super.makeGraphic(16,16, FlxColor.RED);
+	override public function draw()
+	{
+		if (velocity.x != 0 || velocity.y != 0)
+		{
+			switch(facing)
+			{
+				case FlxObject.LEFT:
+					animation.play("left");
+				case FlxObject.RIGHT:
+					animation.play("right");
+					
+				case FlxObject.UP:
+					animation.play("up");
+					
+				case FlxObject.DOWN:
+					animation.play("down");
+			}
+		}
+		super.draw();
 	}
 
 	override public function update() {
