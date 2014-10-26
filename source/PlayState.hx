@@ -29,18 +29,21 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
-		// Virtual Joystick
-		vpad = new FlxAnalog(50, FlxG.height - 50);
-		add(vpad);
-
 
 		// tilemap
 		level = new FlxTilemap();
 		level.loadMap(Assets.getText("assets/data/level_1.csv"), "assets/images/tiles.png", TILE_WIDTH, TILE_HEIGHT);
 		add(level);
 
+		// Virtual Joystick
+		vpad = new FlxAnalog(50, FlxG.height - 50);
+		vpad.alpha = 0.35;
+		add(vpad);
+
 		// Player
 		add(new Player(vpad));
+
+		add(vpad);
 		super.create();
 	}
 	
