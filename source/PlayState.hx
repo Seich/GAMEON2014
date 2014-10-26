@@ -38,7 +38,10 @@ class PlayState extends FlxState
 		// Virtual Joystick
 		vpad = new FlxAnalog(50, FlxG.height - 50);
 		vpad.alpha = 0.35;
-		add(vpad);
+
+		var item = new UpgradeItem(50,50);
+		add(item);
+
 
 		// Player
 		add(new Player(vpad));
