@@ -73,7 +73,7 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
-		FlxG.collide(level, player);
+		FlxG.collide(player, level);
 		_grpEnemies.forEachAlive(function (e:Enemy) {
 			checkEnemyVision(e);
 			FlxG.collide(level, e);
