@@ -84,8 +84,8 @@ class PlayState extends FlxState
 		});
 
 		super.update();
-		FlxG.overlap(player,_grpItems, playerTouchUpgrade);
-		FlxG.overlap(player,_grpEnemies, playerTouchEnemy);
+		FlxG.overlap(player, _grpItems, playerTouchUpgrade);
+		FlxG.overlap(player, _grpEnemies, playerTouchEnemy);
 	}
 
 	private function playerTouchUpgrade(P:Player, U:UpgradeItem):Void
