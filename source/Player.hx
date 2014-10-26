@@ -38,6 +38,7 @@ class Player extends FlxSprite
 			this.velocity.y = 0;
 			return;      
 		}
+
 		var angle = this.vpad.getAngle();
 		if(angle < 22.5 && angle > -22.5){
 			this.velocity.x = 150;
@@ -59,6 +60,22 @@ class Player extends FlxSprite
 			this.velocity.y = -150;
 		} else if(angle > 67.5 && angle < 112.5){
 			this.velocity.y = 150;
+		}
+
+		if(this.x <= 0){
+		      this.x = 0;
+		}
+
+		if(this.x >= 800 - this.width){
+		      this.x = 800 - this.width;
+		}
+
+		if(this.y <= 0){
+		      this.y = 0;
+		}
+
+		if(this.y >= 800 -  this.height){
+		      this.y = 800 - this.height;
 		}
 	}
 
