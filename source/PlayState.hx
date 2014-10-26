@@ -43,8 +43,26 @@ class PlayState extends FlxState
 		// tilemap
 		level = new Level("assets/data/level_1.csv");
 		add(level);
-		add(new FlxSprite(0, 0).loadGraphic("assets/images/hole.png"));
-		add(new FlxSprite(90, 5).loadGraphic("assets/images/rock_1.png"));
+
+		var hole = new FlxSprite(0, 0).loadGraphic("assets/images/hole.png");
+		hole.setGraphicSize(32);
+		hole.updateHitbox();
+		add(hole);
+		
+		var rock = new FlxSprite(96, 45).loadGraphic("assets/images/rock_1.png");
+		rock.setGraphicSize(32);
+		rock.updateHitbox();
+		add(rock);
+		
+		rock = new FlxSprite(128, 40).loadGraphic("assets/images/rock_1.png");
+		rock.setGraphicSize(32);
+		rock.updateHitbox();
+		add(rock);
+		
+		rock = new FlxSprite(160, 48).loadGraphic("assets/images/rock_1.png");
+		rock.setGraphicSize(32);
+		rock.updateHitbox();
+		add(rock);
 		add(new FlxSprite(20, 150).loadGraphic("assets/images/rock_1.png"));
 		add(new FlxSprite(200, 150).loadGraphic("assets/images/plant_1.png"));
 		add(new FlxSprite(100, 200).loadGraphic("assets/images/pool.png"));
@@ -57,6 +75,7 @@ class PlayState extends FlxState
 		_grpItems = new FlxTypedGroup<UpgradeItem>();
 		add(_grpItems);
 		_grpItems.add(new UpgradeItem(150, 150));
+		_grpItems.add(new UpgradeItem(250, 190));
 		// Player
 		player = new Player(movementPad);
 		add(player);
@@ -65,15 +84,20 @@ class PlayState extends FlxState
 
 		_grpEnemies = new FlxTypedGroup<Enemy>();
 		_grpEnemies.add(new Enemy(150, 250, 1));
-		_grpEnemies.add(new Enemy(150, 290, 1));
-		_grpEnemies.add(new Enemy(100, 265, 1));
+		_grpEnemies.add(new Enemy(250, 250, 1));
 		add(_grpEnemies);
-		
-		buttons = new FlxVirtualPad(DPadMode.NONE, ActionMode.A);
-		buttons.alpha = 0.35;
-		add(buttons);
 
-		buttons.buttonA.onDown.callback = attack;
+		var punchButton = new FlxButton(FlxG.width - 36, FlxG.height - 36);
+		punchButton.loadGraphic("assets/images/button_golpe.png");
+		punchButton.onDown.callback = attack;
+		// punchButton.alpha = 0.35;
+		add(punchButton);
+		
+		// buttons = new FlxVirtualPad(DPadMode.NONE, ActionMode.A);
+		// buttons.alpha = 0.35;
+		// add(buttons);
+
+		//buttons.buttonA.onDown.callback = attack;
 
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 		add(movementPad);
