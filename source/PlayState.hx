@@ -35,6 +35,9 @@ class PlayState extends FlxState
 		vpad = new FlxAnalog(50, FlxG.height - 50);
 		vpad.alpha = 0.35;
 
+		var item = new UpgradeItem(50,50);
+		add(item);
+
 		// Player
 		player = new Player(vpad);
 		add(player);
