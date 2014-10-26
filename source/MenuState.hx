@@ -19,7 +19,7 @@ class MenuState extends FlxState
 	{
 		var init_x = Math.floor(FlxG.width / 2 - 40);
 		_btnPlay = new FlxButton(init_x, 80, "Nuevo Juego", newGame);
-		
+
 		add(_btnPlay);
 		super.create();
 	}
