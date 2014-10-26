@@ -8,10 +8,10 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 
 import flixel.ui.FlxAnalog;
-import flixel.tile.FlxTilemap;
 import openfl.Assets;
 
 import Player;
+import Level;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -19,29 +19,27 @@ import Player;
 class PlayState extends FlxState
 {
 	private var vpad:FlxAnalog;
-
-	private var level:FlxTilemap;
-	private var TILE_WIDTH:Int = 32;
-	private var TILE_HEIGHT:Int = 32;
+	private var player: Player;
+	private var level: Level;
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
 	override public function create():Void
 	{
-
 		// tilemap
-		level = new FlxTilemap();
-		level.loadMap(Assets.getText("assets/data/level_1.csv"), "assets/images/tiles.png", TILE_WIDTH, TILE_HEIGHT);
+		level = new Level("assets/data/level_1.csv");
 		add(level);
 
 		// Virtual Joystick
 		vpad = new FlxAnalog(50, FlxG.height - 50);
 		vpad.alpha = 0.35;
-		add(vpad);
 
 		// Player
-		add(new Player(vpad));
+		player = new Player(vpad);
+		add(player);
+
+		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 
 		add(vpad);
 		super.create();
@@ -61,6 +59,7 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+		FlxG.collide(level, player);
 		super.update();
 	}	
 }

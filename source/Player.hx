@@ -21,7 +21,6 @@ class Player extends FlxSprite
 	}
 
 	override public function update() {
-		FlxSpriteUtil.bound(this,0, FlxG.width, 0, FlxG.height);
 		move();
 		super.update();
 	}
