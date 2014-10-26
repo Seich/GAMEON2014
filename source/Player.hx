@@ -19,12 +19,8 @@ class Player extends FlxSprite
 		super(X, Y);
 		this.level = 1;
 		this.vpad = vpad;
-		loadGraphic("assets/images/growlem_1.png",true,64,64,false);
-		this.setGraphicSize(32,32);
-		animation.add("down", [0,4], 6, false);
-		animation.add("up",[1,5],6, false);
-		animation.add("left",[2,6],6, false);
-		animation.add("right",[3,7],6, false);
+		updateSprite();
+		
 		animation.play("down");
 		drag.x = drag.y = 1600;
 	}
@@ -115,15 +111,25 @@ class Player extends FlxSprite
 
 	public function levelUp(){
 		this.level++;
-		super.makeGraphic(16,16, FlxColor.AQUAMARINE);
+		updateSprite();
 	}
 
 	public function levelDown(){
 		this.level--;
-		super.makeGraphic(16,16, FlxColor.AZURE);
 		if(this.level < this.minLevel){
 			this.kill();
+			return;
 		}
+		updateSprite();
 	}
 
+	private function updateSprite(){
+		loadGraphic("assets/images/growlem_"+this.level+".png", true, 64, 64);
+		this.setGraphicSize(32,32);
+		this.updateHitbox();
+		animation.add("down", [0,4], 6, false);
+		animation.add("up",[1,5],6, false);
+		animation.add("left",[2,6],6, false);
+		animation.add("right",[3,7],6, false);
+	}
 }
