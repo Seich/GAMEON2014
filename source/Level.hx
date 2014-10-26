@@ -11,7 +11,7 @@ class Level extends FlxTilemap
 	private var TILE_WIDTH:Int = 32;
 	private var TILE_HEIGHT:Int = 32;
 
-	public function new(map: String, tileset = "assets/images/tiles.png")
+	public function new(map: String, tileset = "assets/images/tiles3.png")
 	{
 		super();
 

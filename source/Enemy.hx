@@ -17,7 +17,7 @@ class Enemy extends FlxSprite
 	public var maxHealth(default, null):UInt;
 	public var speed:Float = 80;
 	public var etype(default, null):Int;
-	public var fovDistance:Float = 160;
+	public var fovDistance:Float = 128;
 
 	private var _brain:FSM;
 	private var _idleTmr:Float;
