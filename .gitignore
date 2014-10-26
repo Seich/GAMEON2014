@@ -1,3 +1,4 @@
 *.sublime-project
 export/*
 *.sublime-workspace
+.DS_Store
