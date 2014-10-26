@@ -9,12 +9,14 @@ import flixel.util.FlxVelocity;
 import flixel.util.FlxSpriteUtil;
 import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
+import flixel.system.FlxSound;
 
 class Player extends FlxSprite
 {
 	private var movementPad: FlxAnalog;
 	private var level:Int;
 	private var minLevel:Int = 1;
+	private var sndAttack: FlxSound;
 
 	public function new(movementPad: FlxAnalog, X:Float = 23, Y:Float = 50) {
 		super(X, Y);
@@ -23,6 +25,7 @@ class Player extends FlxSprite
 		updateSprite();
 		animation.play("down");
 		drag.x = drag.y = 1600;
+		sndAttack = FlxG.sound.load("assets/sounds/hit.ogg");
 	}
 
 	override public function update() {
@@ -66,6 +69,8 @@ class Player extends FlxSprite
 				case FlxObject.DOWN:
 					animation.play("attackDown");
 			}
+
+			sndAttack.play(true);
 	}
 
 	override public function destroy() {

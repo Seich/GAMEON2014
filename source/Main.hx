@@ -7,6 +7,7 @@ import flash.events.Event;
 import flash.Lib;
 import flixel.FlxGame;
 import flixel.FlxState;
+import flixel.FlxG;
 
 class Main extends Sprite 
 {
@@ -63,6 +64,9 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
+
+
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		FlxG.sound.playMusic(AssetPaths.bg__wav, 1, true);
 	}
 }
