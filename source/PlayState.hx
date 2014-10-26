@@ -10,7 +10,10 @@ import flixel.util.FlxMath;
 import flixel.ui.FlxAnalog;
 import openfl.Assets;
 
+import flixel.group.FlxTypedGroup;
+
 import Player;
+import Enemy;
 import Level;
 
 /**
@@ -21,6 +24,8 @@ class PlayState extends FlxState
 	private var vpad:FlxAnalog;
 	private var player: Player;
 	private var level: Level;
+	private var _grpEnemies:FlxTypedGroup<Enemy>;
+
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -45,6 +50,12 @@ class PlayState extends FlxState
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 
 		add(vpad);
+
+		_grpEnemies = new FlxTypedGroup<Enemy>();
+		add(_grpEnemies);
+
+		_grpEnemies.add(new Enemy(50, 50, 1, 100));
+
 		super.create();
 	}
 	
@@ -63,6 +74,24 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		FlxG.collide(level, player);
+		_grpEnemies.forEachAlive(function (e:Enemy) {
+			checkEnemyVision(e);
+			FlxG.collide(level, e);
+		});
+
 		super.update();
-	}	
+	}
+
+	private function checkEnemyVision(e:Enemy):Void
+	{
+		if (e.getMidpoint().distanceTo(player.getMidpoint()) <= 50)
+		{
+			e.seesPlayer = true;
+			e.playerPos.copyFrom(player.getMidpoint());
+		}
+		else
+		{
+			e.seesPlayer = false;
+		}
+	}
 }
