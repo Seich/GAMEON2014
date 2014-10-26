@@ -79,6 +79,12 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+
+		if (buttons.buttonA.status == FlxButton.PRESSED) 
+		{
+			trace(" Dynamic ");
+		}
+
 		FlxG.collide(player, level);
 		_grpEnemies.forEachAlive(function (e:Enemy) {
 			checkEnemyVision(e);
