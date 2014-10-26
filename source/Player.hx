@@ -29,33 +29,40 @@ class Player extends FlxSprite
 	}
 
 	function move() {
-		if(this.vpad.acceleration.x < 0){
-			this.velocity.x = -200;
-		}
-		else if (this.vpad.acceleration.x > 0){
-			this.velocity.x = 200;
-		}
-
-		if(this.vpad.acceleration.y < 0){
-			this.velocity.y = -200;
-		}
-		else if (this.vpad.acceleration.y > 0){
-			this.velocity.y = 200;
-		}
-		trace(this.vpad.acceleration.x);
-		trace(this.vpad.acceleration.y);
-		/*var angle = this.vpad.getAngle();
-		FlxVelocity.accelerateTowardsMouse(this,200,this.vpad.acceleration.x,this.vpad.acceleration.y);
 		var status = this.vpad.status;
-		this.acceleration.x = this.vpad.acceleration.x;
-		this.acceleration.y = this.vpad.acceleration.y;
 		if(status != 2) 
 		{
+			this.velocity.x = 0;
+			this.velocity.y = 0;
 			return;      
 		}
+		var angle = this.vpad.getAngle();
+		if(angle < 22.5 && angle > -22.5){
+			this.velocity.x = 100;
+		} else if(angle < 67.5 && angle > 22.5){
+			this.velocity.x = 70.71;
+			this.velocity.y = 70.71;
+		} else if(angle > 112.5 && angle < 157.5){
+			this.velocity.x = -70.71;
+			this.velocity.y = 70.71;
+		} else if( angle > -157.5 && angle < -112.5){
+			this.velocity.x = -70.71;
+			this.velocity.y = -70.71;
+		} else if(angle > -67.5 && angle < -22.5){
+			this.velocity.x = 70.71;
+			this.velocity.y = -70.71;
+		}else if( angle > 157.5  || angle < -157.5){
+			this.velocity.x = -100;
+		} else if(angle >= -112.5 && angle <= -67.5){
+			this.velocity.y = -100;
+		} else if(angle > 67.5 && angle < 112.5){
+			this.velocity.y = 100;
+		}
+
 		trace(this.vpad.acceleration.x);
 		trace(this.vpad.acceleration.y);
-		trace(angle);*/
+		
+		trace(angle);
 	}
 
 }
