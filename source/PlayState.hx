@@ -50,7 +50,7 @@ class PlayState extends FlxState
 		player = new Player(vpad);
 		add(player);
 
-		FlxG.camera.bounds = new flixel.util.FlxRect(0, 0, 800, 800);
+		FlxG.camera.bounds = new flixel.util.FlxRect(0, 0, 480, 480);
 		_grpEnemies = new FlxTypedGroup<Enemy>();
 		_grpEnemies.add(new Enemy(150, 250, 1, 100));
 

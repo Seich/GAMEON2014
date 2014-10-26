@@ -92,16 +92,16 @@ class Player extends FlxSprite
 		      this.x = 0;
 		}
 
-		if(this.x >= 800 - this.width){
-		      this.x = 800 - this.width;
+		if(this.x >= 480 - this.width){
+		      this.x = 480 - this.width;
 		}
 
 		if(this.y <= 0){
 		      this.y = 0;
 		}
 
-		if(this.y >= 800 -  this.height){
-		      this.y = 800 - this.height;
+		if(this.y >= 480 -  this.height){
+		      this.y = 480 - this.height;
 		}
 	}
 
