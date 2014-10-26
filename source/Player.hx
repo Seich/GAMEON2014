@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.ui.FlxAnalog;
 import flixel.util.FlxColor;
 import flixel.util.FlxAngle;
@@ -17,8 +18,11 @@ class Player extends FlxSprite
 	public function new(vpad: FlxAnalog, X:Float = 0, Y:Float = 0) {
 		super(X, Y);
 		this.level = 1;
+
 		this.vpad = vpad;
-		super.makeGraphic(16,16, FlxColor.BLUE);
+		loadGraphic("assets/images/growlem_1.png",true,64,64,false);
+		animation.add("UP", [0,1] ,6 ,false);
+		animation.play("UP");
 		drag.x = drag.y = 1600;
 	}
 
@@ -27,11 +31,22 @@ class Player extends FlxSprite
 		super.update();
 	}
 
+	override public function draw() {
+		animation.play("UP");
+		if (velocity.x != 0 || velocity.y != 0)
+		{
+			
+		}
+			
+		super.draw();
+	}
+
 	override public function destroy() {
 		super.destroy();
 	}
 
 	function move() {
+		facing = FlxObject.UP;
 		var status = this.vpad.status;
 		if(status != 2) 
 		{
@@ -42,25 +57,21 @@ class Player extends FlxSprite
 
 		var angle = this.vpad.getAngle();
 		if(angle < 22.5 && angle > -22.5){
-			this.velocity.x = 150;
+			this.setVelocity(150,0);
 		} else if(angle < 67.5 && angle > 22.5){
-			this.velocity.x = 106.06;
-			this.velocity.y = 106.06;
+			this.setVelocity(106.06,106.06);
 		} else if(angle > 112.5 && angle < 157.5){
-			this.velocity.x = -106.06;
-			this.velocity.y = 106.06;
+			this.setVelocity(-106.06,106.06);
 		} else if( angle > -157.5 && angle < -112.5){
-			this.velocity.x = -106.06;
-			this.velocity.y = -106.06;
+			this.setVelocity(-106.06,-106.06);
 		} else if(angle > -67.5 && angle < -22.5){
-			this.velocity.x = 106.06;
-			this.velocity.y = -106.06;
+			this.setVelocity(106.06,-106.06);
 		}else if( angle > 157.5  || angle < -157.5){
-			this.velocity.x = -150;
+			this.setVelocity(-150,0);
 		} else if(angle >= -112.5 && angle <= -67.5){
-			this.velocity.y = -150;
+			this.setVelocity(0,-150);
 		} else if(angle > 67.5 && angle < 112.5){
-			this.velocity.y = 150;
+			this.setVelocity(0,150);
 		}
 
 		if(this.x <= 0){
@@ -78,6 +89,11 @@ class Player extends FlxSprite
 		if(this.y >= 800 -  this.height){
 		      this.y = 800 - this.height;
 		}
+	}
+
+	private function setVelocity(X:Float, Y:Float){
+		this.velocity.x = X;
+		this.velocity.y = Y;
 	}
 
 	public function levelUp(){
