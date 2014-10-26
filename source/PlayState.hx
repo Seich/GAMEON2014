@@ -43,8 +43,6 @@ class PlayState extends FlxState
 		movementPad = new FlxAnalog(50, FlxG.height - 50);
 		movementPad.alpha = 0.35;
 
-		buttons = new FlxVirtualPad(DPadMode.NONE, ActionMode.A);
-		add(buttons);
 
 
 		_grpItems = new FlxTypedGroup<UpgradeItem>();
@@ -59,6 +57,9 @@ class PlayState extends FlxState
 		_grpEnemies = new FlxTypedGroup<Enemy>();
 		_grpEnemies.add(new Enemy(150, 250, 1, 100));
 		add(_grpEnemies);
+		
+		buttons = new FlxVirtualPad(DPadMode.NONE, ActionMode.A);
+		add(buttons);
 
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 		add(movementPad);
@@ -82,7 +83,7 @@ class PlayState extends FlxState
 
 		if (buttons.buttonA.status == FlxButton.PRESSED) 
 		{
-			trace(" Dynamic ");
+			player.attack();
 		}
 
 		FlxG.collide(player, level);

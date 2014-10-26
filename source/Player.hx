@@ -50,6 +50,21 @@ class Player extends FlxSprite
 		}
 		super.draw();
 	}
+	public function attack(){
+		switch(facing)
+			{
+				case FlxObject.LEFT:
+					animation.play("attackLeft");
+				case FlxObject.RIGHT:
+					animation.play("attackRight");
+					
+				case FlxObject.UP:
+					animation.play("attackUp");
+					
+				case FlxObject.DOWN:
+					animation.play("attackDown");
+			}
+	}
 
 	override public function destroy() {
 		super.destroy();
@@ -135,6 +150,10 @@ class Player extends FlxSprite
 		animation.add("down", [0,4], 6, false);
 		animation.add("up",[1,5],6, false);
 		animation.add("left",[2,6],6, false);
+		animation.add("attackDown",[0,8,0],6,false);
+		animation.add("attackUp",[1,9,1],6,false);
+		animation.add("attackLeft",[2,10,2],6,false);
+		animation.add("attackRight",[3,11,3],6,false);
 		animation.add("right",[3,7],6, false);
 	}
 }
