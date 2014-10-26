@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxAngle;
 import flixel.util.FlxVelocity;
 import flixel.util.FlxSpriteUtil;
+import flixel.effects.FlxFlicker;
 
 class Player extends FlxSprite
 {
@@ -101,7 +102,16 @@ class Player extends FlxSprite
 		super.makeGraphic(16,16, FlxColor.AQUAMARINE);
 	}
 
-	public function levelDown(){
+	public function levelDown()
+	{
+
+		if (FlxFlicker.isFlickering(this)) 
+		{
+			return;
+		}
+
+		FlxFlicker.flicker(this, 3);
+
 		this.level--;
 		super.makeGraphic(16,16, FlxColor.AZURE);
 		if(this.level < this.minLevel){

@@ -50,15 +50,15 @@ class PlayState extends FlxState
 		player = new Player(vpad);
 		add(player);
 
-		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 		FlxG.camera.bounds = new flixel.util.FlxRect(0, 0, 800, 800);
-
-		add(vpad);
-
 		_grpEnemies = new FlxTypedGroup<Enemy>();
+		_grpEnemies.add(new Enemy(50, 50, 1, 100));
+
 		add(_grpEnemies);
 
-		_grpEnemies.add(new Enemy(50, 50, 1, 100));
+		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
+
+		add(vpad);
 
 		super.create();
 	}
@@ -84,8 +84,8 @@ class PlayState extends FlxState
 		});
 
 		super.update();
-		FlxG.overlap(player,_grpItems, playerTouchUpgrade);
-		FlxG.overlap(player,_grpEnemies, playerTouchEnemy);
+		FlxG.overlap(player, _grpItems, playerTouchUpgrade);
+		FlxG.overlap(player, _grpEnemies, playerTouchEnemy);
 	}
 
 	private function playerTouchUpgrade(P:Player, U:UpgradeItem):Void
