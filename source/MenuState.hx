@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
+import flixel.ui.FlxTypedButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxDestroyUtil;
 using flixel.util.FlxSpriteUtil;
@@ -13,14 +13,22 @@ using flixel.util.FlxSpriteUtil;
  */
 class MenuState extends FlxState
 {
-	private var _btnPlay:FlxButton;
+	var btnPlay:FlxTypedButton<FlxSprite>;
 
 	override public function create():Void
 	{
-		var init_x = Math.floor(FlxG.width / 2 - 40);
-		_btnPlay = new FlxButton(init_x, 80, "Nuevo Juego", newGame);
-		
-		add(_btnPlay);
+		var menuBackground = new FlxSprite(0, 0, "assets/images/mainmenu.png");
+		menuBackground.setGraphicSize(320, 240);
+		add(menuBackground);
+
+		var logo = new FlxSprite(FlxG.width / 2 - 135, 10, "assets/images/logo.png");
+		logo.setGraphicSize(270);
+		add(logo);
+
+		btnPlay = new FlxTypedButton(FlxG.width / 2 - 45, 160, newGame);
+		btnPlay.loadGraphic("assets/images/button_inicio.png");
+		btnPlay.setGraphicSize(90);
+		add(btnPlay);
 		super.create();
 	}
 
@@ -36,7 +44,7 @@ class MenuState extends FlxState
 	override public function destroy():Void
 	{
 		super.destroy();
-		_btnPlay = FlxDestroyUtil.destroy(_btnPlay);
+		btnPlay = FlxDestroyUtil.destroy(btnPlay);
 	}
 
 	/**
