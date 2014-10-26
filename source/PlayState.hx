@@ -38,9 +38,12 @@ class PlayState extends FlxState
 		// tilemap
 		level = new Level("assets/data/level_1.csv");
 		add(level);
-		var cave = new FlxSprite(0, 0);
-		cave.loadGraphic("assets/images/hole.png");
-		add(cave);
+		add(new FlxSprite(0, 0).loadGraphic("assets/images/hole.png"));
+		add(new FlxSprite(90, 5).loadGraphic("assets/images/rock_1.png"));
+		add(new FlxSprite(20, 150).loadGraphic("assets/images/rock_1.png"));
+		add(new FlxSprite(200, 150).loadGraphic("assets/images/plant_1.png"));
+		add(new FlxSprite(100, 200).loadGraphic("assets/images/pool.png"));
+		add(new FlxSprite(300, 100).loadGraphic("assets/images/plant_1.png"));
 
 		// Virtual Joystick
 		movementPad = new FlxAnalog(50, FlxG.height - 50);
