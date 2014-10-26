@@ -12,11 +12,10 @@ import flixel.effects.FlxFlicker;
 
 class Player extends FlxSprite
 {
-	
 	private var movementPad: FlxAnalog;
 	private var level:Int;
 	private var minLevel:Int = 1;
-	public function new(movementPad: FlxAnalog, X:Float = 0, Y:Float = 0) {
+	public function new(movementPad: FlxAnalog, X:Float = 23, Y:Float = 50) {
 		super(X, Y);
 		this.level = 1;
 		this.movementPad = movementPad;
