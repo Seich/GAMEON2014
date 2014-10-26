@@ -13,15 +13,14 @@ import flixel.effects.FlxFlicker;
 class Player extends FlxSprite
 {
 	
-	private var vpad: FlxAnalog;
+	private var movementPad: FlxAnalog;
 	private var level:Int;
 	private var minLevel:Int = 1;
-	public function new(vpad: FlxAnalog, X:Float = 0, Y:Float = 0) {
+	public function new(movementPad: FlxAnalog, X:Float = 0, Y:Float = 0) {
 		super(X, Y);
 		this.level = 1;
-		this.vpad = vpad;
+		this.movementPad = movementPad;
 		updateSprite();
-		
 		animation.play("down");
 		drag.x = drag.y = 1600;
 	}
@@ -57,7 +56,7 @@ class Player extends FlxSprite
 	}
 
 	function move() {
-		var status = this.vpad.status;
+		var status = this.movementPad.status;
 		if(status != 2) 
 		{
 			this.velocity.x = 0;
@@ -65,7 +64,7 @@ class Player extends FlxSprite
 			return;      
 		}
 
-		var angle = this.vpad.getAngle();
+		var angle = this.movementPad.getAngle();
 		if(angle < 22.5 && angle > -22.5){
 			this.setVelocity(150,0);
 			facing = FlxObject.RIGHT;

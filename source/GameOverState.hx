@@ -35,8 +35,4 @@ class GameOverState extends FlxState
 	{
 		FlxG.switchState(new PlayState());
 	}
-
-
-	
-
 }

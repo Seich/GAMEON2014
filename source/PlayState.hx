@@ -21,7 +21,7 @@ import Level;
  */
 class PlayState extends FlxState
 {
-	private var vpad:FlxAnalog;
+	private var movementPad:FlxAnalog;
 	private var player: Player;
 	private var level: Level;
 	private var _grpEnemies:FlxTypedGroup<Enemy>;
@@ -38,28 +38,20 @@ class PlayState extends FlxState
 		add(level);
 
 		// Virtual Joystick
-		vpad = new FlxAnalog(50, FlxG.height - 50);
-		vpad.alpha = 0.35;
-
+		movementPad = new FlxAnalog(50, FlxG.height - 50);
+		movementPad.alpha = 0.35;
 		_grpItems = new FlxTypedGroup<UpgradeItem>();
 		add(_grpItems);
-
 		_grpItems.add(new UpgradeItem(150, 150));
-
 		// Player
-		player = new Player(vpad);
+		player = new Player(movementPad);
 		add(player);
-
 		FlxG.camera.bounds = new flixel.util.FlxRect(0, 0, 800, 800);
 		_grpEnemies = new FlxTypedGroup<Enemy>();
 		_grpEnemies.add(new Enemy(150, 250, 1, 100));
-
 		add(_grpEnemies);
-
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
-
-		add(vpad);
-
+		add(movementPad);
 		super.create();
 	}
 	
