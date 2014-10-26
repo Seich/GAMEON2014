@@ -12,9 +12,10 @@ class Player extends FlxSprite
 {
 	
 	private var vpad: FlxAnalog;
-
+	private var level:Int;
 	public function new(vpad: FlxAnalog, X:Float = 0, Y:Float = 0) {
 		super(X, Y);
+		this.level = 1;
 		this.vpad = vpad;
 		super.makeGraphic(16,16, FlxColor.BLUE);
 		drag.x = drag.y = 1600;
@@ -59,6 +60,11 @@ class Player extends FlxSprite
 		} else if(angle > 67.5 && angle < 112.5){
 			this.velocity.y = 150;
 		}
+	}
+
+	public function levelUp(){
+		this.level++;
+		super.makeGraphic(16,16, FlxColor.AQUAMARINE);
 	}
 
 }

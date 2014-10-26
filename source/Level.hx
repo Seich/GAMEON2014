@@ -4,6 +4,7 @@ import flixel.tile.FlxTilemap;
 import openfl.Assets;
 import flixel.FlxObject;
 import flixel.FlxG;
+import flixel.group.FlxTypedGroup;
 
 class Level extends FlxTilemap
 {
@@ -17,7 +18,6 @@ class Level extends FlxTilemap
 		this.loadMap(Assets.getText(map), tileset, TILE_WIDTH, TILE_HEIGHT, 0, 0);
 		this.setTileProperties(1, FlxObject.NONE);
 		this.setTileProperties(0, FlxObject.ANY);
-
 		FlxG.worldBounds.set(0, 0, this.width, this.height);
 	}	
 }
