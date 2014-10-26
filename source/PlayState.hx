@@ -48,6 +48,7 @@ class PlayState extends FlxState
 		add(player);
 
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
+		FlxG.camera.bounds = new flixel.util.FlxRect(0, 0, 800, 800);
 
 		add(vpad);
 
