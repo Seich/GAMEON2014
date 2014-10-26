@@ -8,6 +8,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 
 import flixel.ui.FlxAnalog;
+import flixel.ui.FlxVirtualPad;
 import openfl.Assets;
 
 import flixel.group.FlxTypedGroup;
@@ -22,6 +23,7 @@ import Level;
 class PlayState extends FlxState
 {
 	private var movementPad:FlxAnalog;
+	private var buttons: FlxVirtualPad;
 	private var player: Player;
 	private var level: Level;
 	private var _grpEnemies:FlxTypedGroup<Enemy>;
@@ -40,6 +42,11 @@ class PlayState extends FlxState
 		// Virtual Joystick
 		movementPad = new FlxAnalog(50, FlxG.height - 50);
 		movementPad.alpha = 0.35;
+
+		buttons = new FlxVirtualPad(DPadMode.NONE, ActionMode.A);
+		add(buttons);
+
+
 		_grpItems = new FlxTypedGroup<UpgradeItem>();
 		add(_grpItems);
 		_grpItems.add(new UpgradeItem(150, 150));
@@ -52,7 +59,7 @@ class PlayState extends FlxState
 		_grpEnemies = new FlxTypedGroup<Enemy>();
 		_grpEnemies.add(new Enemy(150, 250, 1, 100));
 		add(_grpEnemies);
-		
+
 		FlxG.camera.follow(player, flixel.FlxCamera.STYLE_LOCKON);
 		add(movementPad);
 		super.create();
