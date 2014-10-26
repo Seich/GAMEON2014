@@ -8,6 +8,7 @@ import flixel.util.FlxAngle;
 import flixel.util.FlxVelocity;
 import flixel.util.FlxSpriteUtil;
 import flixel.FlxObject;
+import flixel.effects.FlxFlicker;
 
 class Player extends FlxSprite
 {
@@ -115,9 +116,14 @@ class Player extends FlxSprite
 	}
 
 	public function levelDown(){
+		if(FlxFlicker.isFlickering(this)){
+		      return;
+		}
+		FlxFlicker.flicker(this,3);
 		this.level--;
 		if(this.level < this.minLevel){
 			this.kill();
+			FlxG.switchState(new GameOverState());
 			return;
 		}
 		updateSprite();
