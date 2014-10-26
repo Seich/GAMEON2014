@@ -12,9 +12,11 @@ class Player extends FlxSprite
 {
 	
 	private var vpad: FlxAnalog;
-
+	private var level:Int;
+	private var minLevel:Int = 1;
 	public function new(vpad: FlxAnalog, X:Float = 0, Y:Float = 0) {
 		super(X, Y);
+		this.level = 1;
 		this.vpad = vpad;
 		super.makeGraphic(16,16, FlxColor.BLUE);
 		drag.x = drag.y = 1600;
@@ -75,6 +77,19 @@ class Player extends FlxSprite
 
 		if(this.y >= 800 -  this.height){
 		      this.y = 800 - this.height;
+		}
+	}
+
+	public function levelUp(){
+		this.level++;
+		super.makeGraphic(16,16, FlxColor.AQUAMARINE);
+	}
+
+	public function levelDown(){
+		this.level--;
+		super.makeGraphic(16,16, FlxColor.AZURE);
+		if(this.level < this.minLevel){
+			this.kill();
 		}
 	}
 

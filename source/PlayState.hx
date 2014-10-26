@@ -25,6 +25,7 @@ class PlayState extends FlxState
 	private var player: Player;
 	private var level: Level;
 	private var _grpEnemies:FlxTypedGroup<Enemy>;
+	private var _grpItems:FlxTypedGroup<UpgradeItem>;
 
 
 	/**
@@ -40,8 +41,10 @@ class PlayState extends FlxState
 		vpad = new FlxAnalog(50, FlxG.height - 50);
 		vpad.alpha = 0.35;
 
-		var item = new UpgradeItem(50,50);
-		add(item);
+		_grpItems = new FlxTypedGroup<UpgradeItem>();
+		add(_grpItems);
+
+		_grpItems.add(new UpgradeItem(150, 150));
 
 		// Player
 		player = new Player(vpad);
@@ -81,6 +84,16 @@ class PlayState extends FlxState
 		});
 
 		super.update();
+		FlxG.overlap(player,_grpItems, playerTouchUpgrade);
+		FlxG.overlap(player,_grpEnemies, playerTouchEnemy);
+	}
+
+	private function playerTouchUpgrade(P:Player, U:UpgradeItem):Void
+	{
+		if(P.alive && P.exists && U.alive && U.exists){
+			U.kill();
+			P.levelUp();
+		}
 	}
 
 	private function checkEnemyVision(e:Enemy):Void
@@ -93,6 +106,13 @@ class PlayState extends FlxState
 		else
 		{
 			e.seesPlayer = false;
+		}
+	}
+
+	private function playerTouchEnemy(P:Player, E:Enemy):Void
+	{
+		if(P.alive && P.exists && E.alive && E.exists){
+			P.levelDown();
 		}
 	}
 }
