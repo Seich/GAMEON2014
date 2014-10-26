@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.system.FlxSound;
 
 import flixel.ui.FlxAnalog;
 import flixel.ui.FlxVirtualPad;
@@ -28,6 +29,7 @@ class PlayState extends FlxState
 	private var level: Level;
 	private var _grpEnemies:FlxTypedGroup<Enemy>;
 	private var _grpItems:FlxTypedGroup<UpgradeItem>;
+	private var sndItem: FlxSound;
 
 
 	/**
@@ -35,6 +37,9 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
+
+		sndItem = flixel.FlxG.sound.load("assets/sounds/lvl.ogg");
+
 		// tilemap
 		level = new Level("assets/data/level_1.csv");
 		add(level);
@@ -126,9 +131,11 @@ class PlayState extends FlxState
 
 	private function playerTouchUpgrade(P:Player, U:UpgradeItem):Void
 	{
+
 		if(P.alive && P.exists && U.alive && U.exists){
+			sndItem.play(true);
 			U.kill();
-			P.levelUp();
+			P.levelUp();			
 		}
 	}
 
