@@ -6,6 +6,7 @@ import flixel.ui.FlxAnalog;
 import flixel.util.FlxColor;
 import flixel.util.FlxAngle;
 import flixel.util.FlxVelocity;
+import flixel.util.FlxSpriteUtil;
 
 class Player extends FlxSprite
 {
@@ -20,6 +21,7 @@ class Player extends FlxSprite
 	}
 
 	override public function update() {
+		FlxSpriteUtil.bound(this,0, FlxG.width, 0, FlxG.height);
 		move();
 		super.update();
 	}
@@ -38,31 +40,26 @@ class Player extends FlxSprite
 		}
 		var angle = this.vpad.getAngle();
 		if(angle < 22.5 && angle > -22.5){
-			this.velocity.x = 100;
+			this.velocity.x = 150;
 		} else if(angle < 67.5 && angle > 22.5){
-			this.velocity.x = 70.71;
-			this.velocity.y = 70.71;
+			this.velocity.x = 106.06;
+			this.velocity.y = 106.06;
 		} else if(angle > 112.5 && angle < 157.5){
-			this.velocity.x = -70.71;
-			this.velocity.y = 70.71;
+			this.velocity.x = -106.06;
+			this.velocity.y = 106.06;
 		} else if( angle > -157.5 && angle < -112.5){
-			this.velocity.x = -70.71;
-			this.velocity.y = -70.71;
+			this.velocity.x = -106.06;
+			this.velocity.y = -106.06;
 		} else if(angle > -67.5 && angle < -22.5){
-			this.velocity.x = 70.71;
-			this.velocity.y = -70.71;
+			this.velocity.x = 106.06;
+			this.velocity.y = -106.06;
 		}else if( angle > 157.5  || angle < -157.5){
-			this.velocity.x = -100;
+			this.velocity.x = -150;
 		} else if(angle >= -112.5 && angle <= -67.5){
-			this.velocity.y = -100;
+			this.velocity.y = -150;
 		} else if(angle > 67.5 && angle < 112.5){
-			this.velocity.y = 100;
+			this.velocity.y = 150;
 		}
-
-		trace(this.vpad.acceleration.x);
-		trace(this.vpad.acceleration.y);
-		
-		trace(angle);
 	}
 
 }
