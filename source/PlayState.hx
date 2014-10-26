@@ -85,6 +85,7 @@ class PlayState extends FlxState
 
 		super.update();
 		FlxG.overlap(player,_grpItems, playerTouchUpgrade);
+		FlxG.overlap(player,_grpEnemies, playerTouchEnemy);
 	}
 
 	private function playerTouchUpgrade(P:Player, U:UpgradeItem):Void
@@ -105,6 +106,13 @@ class PlayState extends FlxState
 		else
 		{
 			e.seesPlayer = false;
+		}
+	}
+
+	private function playerTouchEnemy(P:Player, E:Enemy):Void
+	{
+		if(P.alive && P.exists && E.alive && E.exists){
+			P.levelDown();
 		}
 	}
 }
